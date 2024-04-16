@@ -1,0 +1,9 @@
+{
+    "fName": "Test",
+    "sName": "Surname",
+    "address": "64 Zoo Lane",
+    "city": "Zootopia",
+    "postcode": "SW1 1AA",
+    "phoneNumber":"555 564 2211",
+    "email": "test@pwr.com"
+}
