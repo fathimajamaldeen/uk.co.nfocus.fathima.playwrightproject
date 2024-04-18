@@ -25,23 +25,20 @@ test.beforeEach(`Runs before each test`, async ({ page }) => {
 
     const myAccountPage = new MyAccountPOM(page);
     await myAccountPage.clickShopLink();
-
-
-});
+})
 
 test.afterEach(`Runs after each test`, async ({ page }) => {
     const myAccountPage = new MyAccountPOM(page);
     await myAccountPage.logout();
 
-    //await page.close();
+    await page.close();
+})
 
-});
 
-
-test.describe(`Multiple test cases`, () => {
+test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
     for (const product of products) {
         for (const { code, amount } of discountData) {
-            test(`Applying Discount Code Test - ${code} for the product ${product.item}`, async ({ page }) => {
+            test(`Applying Discount Code Test - ${code} for the product ${product.item}`, async ({ page }, testInfo) => {
                 const shopPage = new ShopPOM(page);
                 await shopPage.addItemToCart(product.item);
                 await shopPage.goToCart();
@@ -55,17 +52,18 @@ test.describe(`Multiple test cases`, () => {
                 const expectedDiscountValue = subtotalValue * amount;
                 expect(discountValue).toBe(expectedDiscountValue);
 
+
                 //Cleaning up the cart
                 await cartPage.removeCouponCodeFromCart();
                 await cartPage.removeItemFromCart();
 
                 await cartPage.goMyAccount();
-            });
-        };  
-    };
+            })
+        }
+    }
 
     for (const product of products) {
-        test(`Checking out Test for the product ${product.item}`, async ({ page }) => {
+        test.only(`Checking out Test for the product ${product.item}`, async ({ page }, testInfo) => {
             const shopPage = new ShopPOM(page);
             await shopPage.addItemToCart(product.item);
 
@@ -81,9 +79,17 @@ test.describe(`Multiple test cases`, () => {
                 billingDetail.postcode,
                 billingDetail.phoneNumber,
                 billingDetail.email);
-
+            
             const orderReceivedPage = new OrderRecievedPOM(page);
             const orderNumberText = await orderReceivedPage.captureOrderNumber();
+
+            const orderNoScreenshot = await page.screenshot({ path: `screenshots/test2/orderNo-${product.item}.png` });
+
+            await testInfo.attach('Order No', {
+                body: orderNoScreenshot,
+                contentType: 'image/png',
+            });
+
             await orderReceivedPage.goToMyAccount();
 
             const myAccountPage = new MyAccountPOM(page);
@@ -91,8 +97,13 @@ test.describe(`Multiple test cases`, () => {
 
             const ordersPage = new OrdersInMyAccountPOM(page);
             const accountOrderNumberCleaned = await ordersPage.captureAccountOrderNumber();
-            expect(orderNumberText).toEqual(accountOrderNumberCleaned);
+            const orderNoInAccountScreenshot = await page.screenshot({ path: `screenshots/test2/orderNoInAccount-${product.item}.png` });
 
-        });
-    };
-});
+            await testInfo.attach('Order No. in Account', {
+                body: orderNoInAccountScreenshot,
+                contentType: 'image/png',
+            });
+            expect(orderNumberText).toEqual(accountOrderNumberCleaned);
+        })
+    }
+})

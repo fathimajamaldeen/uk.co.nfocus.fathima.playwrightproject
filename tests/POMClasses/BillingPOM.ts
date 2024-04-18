@@ -1,4 +1,4 @@
-import {Page, Locator} from '@playwright/test'
+import { Page, Locator } from '@playwright/test'
 
 export default class BillingPOM {
 
@@ -10,9 +10,9 @@ export default class BillingPOM {
     billingPostcode: Locator
     billingPhone: Locator
     billingEmail: Locator
-    placeOrderButton
+    placeOrderButton: Locator
 
-    constructor(page: Page){
+    constructor(page: Page) {
         this.page = page;
         //Locators
         this.billingFirstName = page.locator('#billing_first_name');
@@ -26,8 +26,8 @@ export default class BillingPOM {
     }
 
     //ServiceMethods
-    
-    async fillBillingDetailsAndProceed(fName: string, lName:string, address: string, city: string, postcode: string, phone: string, email: string){
+
+    async fillBillingDetailsAndProceed(fName: string, lName: string, address: string, city: string, postcode: string, phone: string, email: string) {
         await this.billingFirstName.fill(fName);
         await this.bilingLastName.fill(lName);
         await this.billingAddress.fill(address);
@@ -37,5 +37,4 @@ export default class BillingPOM {
         await this.billingEmail.fill(email);
         await this.placeOrderButton.click();
     }
-
 }
