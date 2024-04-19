@@ -1,30 +1,22 @@
-import {Page, Locator} from '@playwright/test'
+import { Page } from '@playwright/test'
+import BasePOM from './BasePOM'
+import MyAccountPOM from './MyAccountPOM';
 
 
-export default class LoginPOM {
+export default class LoginPOM extends BasePOM{
 
-    page: Page
-    usernameField: Locator
-    passwordField: Locator
-    loginButton: Locator
-        
-    constructor(page: Page){
-        this.page = page;
-        //Locators
-        this.usernameField = page.locator('#username');
-        this.passwordField = page.locator('#password');
-        this.loginButton = page.getByRole('button', { name: 'Log in' });
-    };
-    
-    //ServiceMethods
-    
-    async login(username:string, password: string){
+   
+    usernameField = this.page.locator('#username');
+    passwordField = this.page.locator('#password');
+    loginButton = this.page.getByRole('button', { name: 'Log in' });
+          
+    //Logging in 
+    async login(username:string, password: string): Promise<MyAccountPOM> {
         await this.usernameField.clear();
         await this.usernameField.fill(username);
         await this.passwordField.clear();
         await this.passwordField.fill(password);
         await this.loginButton.click();
+        return new MyAccountPOM(this.page);
     };
-    
-    
 }

@@ -1,31 +1,17 @@
-import { Page, Locator } from '@playwright/test'
+import { Page } from '@playwright/test'
+import BasePOM from './BasePOM'
 
-export default class BillingPOM {
+export default class CheckoutPOM extends BasePOM {
 
-    page: Page
-    billingFirstName: Locator
-    bilingLastName: Locator
-    billingAddress: Locator
-    billingCity: Locator
-    billingPostcode: Locator
-    billingPhone: Locator
-    billingEmail: Locator
-    placeOrderButton: Locator
+    billingFirstName = this.page.locator('#billing_first_name');
+    bilingLastName = this.page.locator('#billing_last_name');
+    billingAddress = this.page.locator('#billing_address_1');
+    billingCity = this.page.locator('#billing_city');
+    billingPostcode = this.page.locator('#billing_postcode');
+    billingPhone = this.page.locator('#billing_phone');
+    billingEmail = this.page.locator('#billing_email');
+    placeOrderButton = this.page.getByRole('button', { name: 'Place order' });
 
-    constructor(page: Page) {
-        this.page = page;
-        //Locators
-        this.billingFirstName = page.locator('#billing_first_name');
-        this.bilingLastName = page.locator('#billing_last_name');
-        this.billingAddress = page.locator('#billing_address_1');
-        this.billingCity = page.locator('#billing_city');
-        this.billingPostcode = page.locator('#billing_postcode');
-        this.billingPhone = page.locator('#billing_phone');
-        this.billingEmail = page.locator('#billing_email');
-        this.placeOrderButton = page.getByRole('button', { name: 'Place order' });
-    }
-
-    //ServiceMethods
 
     async fillBillingDetailsAndProceed(fName: string, lName: string, address: string, city: string, postcode: string, phone: string, email: string) {
         await this.billingFirstName.fill(fName);

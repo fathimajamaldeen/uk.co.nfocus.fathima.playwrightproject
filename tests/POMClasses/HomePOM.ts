@@ -1,19 +1,13 @@
-import {Page, Locator} from '@playwright/test'
+import { Page } from '@playwright/test'
+import BasePOM from './BasePOM';
 
-export default class HomePOM {
+export default class HomePOM extends BasePOM {
 
-    page: Page
-    myAccountLink: Locator
-    popUpBanner: Locator
     
-    constructor(page: Page){
-        this.page = page;
-        //Locators
-        this.popUpBanner = page.getByText('Dismiss');
-        this.myAccountLink = page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
-    }
-
-    //ServiceMethods
+    popUpBanner = this.page.getByText('Dismiss');
+    myAccountLink = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
+ 
+   //ServiceMethods
     async dismissPopUpBanner(){
         await this.popUpBanner.click();
     }
@@ -21,5 +15,4 @@ export default class HomePOM {
     async goMyAccount(){
         await this.myAccountLink.click();
     }
-
 }

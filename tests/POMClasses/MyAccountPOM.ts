@@ -1,25 +1,19 @@
-import {Page, Locator} from '@playwright/test'
+import { Page } from '@playwright/test'
+import BasePOM from './BasePOM';
+import ShopPOM from './ShopPOM';
 
-export default class MyAccountPOM {
+export default class MyAccountPOM extends BasePOM {
 
-    page: Page
-    shopLink: Locator
-    ordersLink: Locator
-    cartLink: Locator
-    logoutLink: Locator
-    
-    constructor(page: Page){
-        this.page = page;
-        //Locators
-        this.shopLink = page.locator('#menu-item-43').getByRole('link', { name: 'Shop' });
-        this.ordersLink = page.getByRole('link', { name: ' Orders' });
-        this.cartLink = page.locator('#menu-item-44').getByRole('link', { name: 'Cart' });
-        this.logoutLink = page.getByRole('link', { name: ' Logout' })
-    }
+   
+    shopLink = this.page.locator('#menu-item-43').getByRole('link', { name: 'Shop' });
+    ordersLink = this.page.getByRole('link', { name: ' Orders' });
+    cartLink = this.page.locator('#menu-item-44').getByRole('link', { name: 'Cart' });
+    logoutLink = this.page.getByRole('link', { name: ' Logout' })
 
     //Service Methods
-    async clickShopLink() {
+    async clickShopLink(): Promise<ShopPOM> {
         await this.shopLink.click();
+        return new ShopPOM(this.page);
     }
 
     async goToOrders(){
@@ -31,7 +25,6 @@ export default class MyAccountPOM {
     }
 
     async logout(){
-        await this.logoutLink. click();
-    };
-
+        await this.logoutLink.click();
+    }
 }

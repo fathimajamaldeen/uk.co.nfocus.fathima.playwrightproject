@@ -1,39 +1,29 @@
-import { Page, Locator } from '@playwright/test'
+import { Page } from '@playwright/test'
 import HelperLib from './HelperLib'
+import BasePOM from './BasePOM'
 
-export default class CartPOM {
+export default class CartPOM extends BasePOM {
 
-    page: Page
-    discountCodeField: Locator
-    applyCodeButton: Locator
-    proceedToCheckout: Locator
-    discountPriceElement: Locator
-    totalPriceElement: Locator
-    subtotalPriceElement: Locator
-    shippingPriceElement: Locator
-    myAccountLink: Locator
-    removeCoupon: Locator
-    removeItem: Locator
+   
+    discountCodeField = this.page.getByPlaceholder('Coupon code');
+    applyCodeButton = this.page.getByRole('button', { name: 'Apply coupon' })
+    proceedToCheckout = this.page.getByRole('link', { name: 'Proceed to checkout ' });
+    discountPriceElement = this.page.locator('.cart-discount .woocommerce-Price-amount');
+    totalPriceElement = this.page.locator('strong bdi');
+    subtotalPriceElement = this.page.locator('td:nth-child(2) > .woocommerce-Price-amount > bdi');
+    shippingPriceElement = this.page.locator('label bdi');
+    myAccountLink = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
+    removeCoupon = this.page.getByRole('link', { name: '[Remove]' });
+    removeItem = this.page.getByLabel('Remove this item');
 
     helperLib: HelperLib
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.helperLib = new HelperLib();
-        //Locators
-        this.discountCodeField = page.getByPlaceholder('Coupon code');
-        this.applyCodeButton = page.getByRole('button', { name: 'Apply coupon' })
-        this.proceedToCheckout = page.getByRole('link', { name: 'Proceed to checkout ' });
-        this.discountPriceElement = page.locator('.cart-discount .woocommerce-Price-amount');
-        this.totalPriceElement = page.locator('strong bdi');
-        this.subtotalPriceElement = page.locator('td:nth-child(2) > .woocommerce-Price-amount > bdi');
-        this.shippingPriceElement = page.locator('label bdi');
-        this.myAccountLink = page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
-        this.removeCoupon = page.getByRole('link', { name: '[Remove]' });
-        this.removeItem = page.getByLabel('Remove this item');
+        //Locator
     }
 
-    //ServiceMethods
     async applyDiscountCode(discountCode: string) {
         await this.discountCodeField.click();
         await this.discountCodeField.clear();
@@ -76,6 +66,4 @@ export default class CartPOM {
     async captureShippingPrice() {
         return this.helperLib.ValueCleaner(this.shippingPriceElement);
     }
-
-
 }

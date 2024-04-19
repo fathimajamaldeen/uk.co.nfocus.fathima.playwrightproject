@@ -1,18 +1,11 @@
-import {Page, Locator} from '@playwright/test'
+import { Page } from '@playwright/test'
+import BasePOM from './BasePOM';
 
-export default class OrderReceivedPOM {
+export default class OrderReceivedPOM extends BasePOM{
 
-    page: Page
-    orderNumber: Locator
-    myAccount: Locator
-    
-    constructor(page: Page){
-        this.page = page;
-        //Locators
-        this.orderNumber = page.locator('.woocommerce-order-overview__order > strong');
-        this.myAccount = page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
-    }
-    
+    orderNumber = this.page.locator('.woocommerce-order-overview__order > strong');
+    myAccount = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
+       
     //ServiceMethods
     async captureOrderNumber(){
         return await this.orderNumber.innerText();

@@ -1,7 +1,6 @@
-import { Page, Locator } from '@playwright/test'
+import { Locator } from '@playwright/test'
 
 export default class HelperLib {
-    
 
     async ValueCleaner(valueLocator: Locator){
         const value = await valueLocator.innerText();
@@ -15,5 +14,4 @@ export default class HelperLib {
         const value = await valueLocator.innerText();
         return value.replace(/[^\d.]/g, '').trim();
     }
-
-};
+}

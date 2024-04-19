@@ -1,25 +1,18 @@
-import {Page, Locator} from '@playwright/test'
+import { Page } from '@playwright/test'
+import BasePOM from './BasePOM';
+import CartPOM from './CartPOM';
 
-export default class ShopPOM {
+export default class ShopPOM extends BasePOM{
 
-    page: Page
     
-    viewCart: Locator
+    viewCart = this.page.getByTitle('View cart');
     
-    constructor(page: Page){
-        this.page = page;
-        //Locators
-        this.viewCart = page.getByTitle('View cart');
-
-    }
-
     //ServiceMethods
     async addItemToCart(itemName: string) {
         await this.page.getByLabel(`Add “${itemName}” to your cart`).click();
     }
-    async goToCart(){
+    async goToCart(): Promise<CartPOM> {
         await this.viewCart.click();
+        return new CartPOM(this.page);
     }
-
 }
-
