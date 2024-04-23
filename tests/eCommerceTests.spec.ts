@@ -1,8 +1,5 @@
 import { test, expect } from './testFixture.ts';
-import HomePOM from './POMClasses/HomePOM'
-import LoginPOM from './POMClasses/LoginPOM';
 import MyAccountPOM from './POMClasses/MyAccountPOM';
-import ShopPOM from './POMClasses/ShopPOM';
 import CartPOM from './POMClasses/CartPOM';
 import CheckoutPOM from './POMClasses/BillingPOM';
 import OrderRecievedPOM from './POMClasses/OrderReceivedPOM';
@@ -10,31 +7,6 @@ import OrdersInMyAccountPOM from './POMClasses/OrdersInMyAccountPOM';
 import products from '../test-data/products.json';
 import billingDetail from '../test-data/billingDetails.json';
 import discountData from '../test-data/discountCodes.json';
-import { log } from 'console';
-
-
-// test.beforeEach(`Runs before each test`, async ({ page }) => {
-//     //Go to site
-//     await page.goto('demo-site');
-
-//     const home = new HomePOM(page);
-//     await home.dismissPopUpBanner();
-//     await home.goMyAccount();
-
-//     const loginPage = new LoginPOM(page);
-//     await loginPage.login(process.env.EMAIL as string, process.env.PASSWORD as string);
-
-//     const myAccountPage = new MyAccountPOM(page);
-//     await myAccountPage.clickShopLink();
-// })
-
-// test.afterEach(`Runs after each test`, async ({ page }) => {
-//     const myAccountPage = new MyAccountPOM(page);
-//     await myAccountPage.logout();
-
-//     await page.close();
-// })
-
 
 test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
     for (const product of products) {
@@ -45,7 +17,7 @@ test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
 
                 const cartPage = new CartPOM(loggedInShop.page);
                 await cartPage.applyDiscountCode(code);
-                await cartPage.clickApplyCode();
+                await cartPage.applyCouponCode();
 
                 const subtotalValue = await cartPage.captureSubTotalPrice();
                 const discountValue = await cartPage.captureDiscountPrice();
@@ -57,10 +29,10 @@ test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
                 await cartPage.removeCouponCodeFromCart();
                 await cartPage.removeItemFromCart();
 
-                await cartPage.goMyAccount();
-            })
-        }
-    }
+                await cartPage.goToMyAccount();
+            });
+        };
+    };
 
     for (const product of products) {
         test(`Checking out Test for the product ${product.item}`, async ({ loggedInShop }, testInfo) => {
@@ -105,6 +77,6 @@ test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
                 contentType: 'image/png',
             });
             expect(orderNumberText).toEqual(accountOrderNumberCleaned);
-        })
-    }
-})
+        });
+    };
+});

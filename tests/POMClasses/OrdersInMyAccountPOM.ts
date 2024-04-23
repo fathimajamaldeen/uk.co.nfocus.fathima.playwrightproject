@@ -4,10 +4,9 @@ import BasePOM from './BasePOM';
 
 export default class OrdersInMyaccountPOM extends BasePOM{
 
-    
-    accountOrderNumber = this.page.locator('.woocommerce-orders-table__row:nth-child(1) > .woocommerce-orders-table__cell-order-number > a');
-    logoutButton = this.page.getByRole('link', { name: ' Logout' });
-    helperLib: HelperLib
+    private accountOrderNumber = this.page.locator('.woocommerce-orders-table__row:nth-child(1) > .woocommerce-orders-table__cell-order-number > a');
+    private logOut = this.page.getByRole('link', { name: ' Logout' });
+    private helperLib: HelperLib;
     
     constructor(page: Page){
         super(page);
@@ -15,11 +14,11 @@ export default class OrdersInMyaccountPOM extends BasePOM{
     }
 
     //ServiceMethods
-    async captureAccountOrderNumber(){
+    async captureAccountOrderNumber(): Promise<string>{
         return this.helperLib.CleaningOrderValue(this.accountOrderNumber); 
     }
 
     async logout(){
-        await this.logoutButton.click();
+        await this.logOut.click();
     }
 }

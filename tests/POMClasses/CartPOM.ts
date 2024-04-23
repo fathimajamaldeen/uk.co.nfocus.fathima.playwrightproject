@@ -3,18 +3,17 @@ import HelperLib from './HelperLib'
 import BasePOM from './BasePOM'
 
 export default class CartPOM extends BasePOM {
-
    
-    discountCodeField = this.page.getByPlaceholder('Coupon code');
-    applyCodeButton = this.page.getByRole('button', { name: 'Apply coupon' })
-    proceedToCheckout = this.page.getByRole('link', { name: 'Proceed to checkout ' });
-    discountPriceElement = this.page.locator('.cart-discount .woocommerce-Price-amount');
-    totalPriceElement = this.page.locator('strong bdi');
-    subtotalPriceElement = this.page.locator('td:nth-child(2) > .woocommerce-Price-amount > bdi');
-    shippingPriceElement = this.page.locator('label bdi');
-    myAccountLink = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
-    removeCoupon = this.page.getByRole('link', { name: '[Remove]' });
-    removeItem = this.page.getByLabel('Remove this item');
+    private discountCodeField = this.page.getByPlaceholder('Coupon code');
+    private applyCoupon = this.page.getByRole('button', { name: 'Apply coupon' });
+    private proceedToCheckout = this.page.getByRole('link', { name: 'Proceed to checkout ' });
+    private discountPriceElement = this.page.locator('.cart-discount .woocommerce-Price-amount');
+    private totalPriceElement = this.page.locator('strong bdi');
+    private subtotalPriceElement = this.page.locator('td:nth-child(2) > .woocommerce-Price-amount > bdi');
+    private shippingPriceElement = this.page.locator('label bdi');
+    private myAccount = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
+    private removeCoupon = this.page.getByRole('link', { name: '[Remove]' });
+    private removeItem = this.page.getByLabel('Remove this item');
 
     helperLib: HelperLib
 
@@ -30,16 +29,16 @@ export default class CartPOM extends BasePOM {
         await this.discountCodeField.fill(discountCode);
     }
 
-    async clickApplyCode() {
-        await this.applyCodeButton.click();
+    async applyCouponCode() {
+        await this.applyCoupon.click();
     }
 
     async goToCheckout() {
         await this.proceedToCheckout.click();
     }
 
-    async goMyAccount(){
-        await this.myAccountLink.click();
+    async goToMyAccount(){
+        await this.myAccount.click();
     }
 
     async removeCouponCodeFromCart(){
@@ -51,19 +50,19 @@ export default class CartPOM extends BasePOM {
     }
 
     //Capturing Methods
-    async captureDiscountPrice(){
+    async captureDiscountPrice(): Promise<number>{
         return this.helperLib.ValueCleaner(this.discountPriceElement);
     }
 
-    async captureTotalPrice() {
+    async captureTotalPrice(): Promise<number> {
         return this.helperLib.ValueCleaner(this.totalPriceElement);
     }
 
-    async captureSubTotalPrice() {
+    async captureSubTotalPrice(): Promise<number> {
         return this.helperLib.ValueCleaner(this.subtotalPriceElement);
     }
 
-    async captureShippingPrice() {
+    async captureShippingPrice(): Promise<number> {
         return this.helperLib.ValueCleaner(this.shippingPriceElement);
     }
 }

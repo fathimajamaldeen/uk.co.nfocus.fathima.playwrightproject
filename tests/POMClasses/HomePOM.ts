@@ -1,11 +1,9 @@
-import { Page } from '@playwright/test'
 import BasePOM from './BasePOM';
 
 export default class HomePOM extends BasePOM {
-
     
-    popUpBanner = this.page.getByText('Dismiss');
-    myAccountLink = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
+    private popUpBanner = this.page.getByText('Dismiss');
+    private myAccount = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
  
    //ServiceMethods
     async dismissPopUpBanner(){
@@ -13,6 +11,6 @@ export default class HomePOM extends BasePOM {
     }
     
     async goMyAccount(){
-        await this.myAccountLink.click();
+        await this.myAccount.click();
     }
 }

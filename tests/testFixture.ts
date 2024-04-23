@@ -22,9 +22,9 @@ export const test = base.extend<testFixture>({
         await homePage.goMyAccount();
 
         const loginPage = new LoginPOM(homePage.page);
-        const myAccountPage = await loginPage.login(process.env.EMAIL as string, process.env.PASSWORD as string);
+        const myAccountPage = await loginPage.login(process.env.EMAIL, process.env.PASSWORD);
 
-        await use(await myAccountPage.clickShopLink());
+        await use(await myAccountPage.GoToShop());
 
         await myAccountPage.logout();
 
