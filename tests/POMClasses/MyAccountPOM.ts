@@ -7,7 +7,7 @@ export default class MyAccountPOM extends BasePOM {
     private shopLink = this.page.locator('#menu-item-43').getByRole('link', { name: 'Shop' });
     private orders = this.page.getByRole('link', { name: ' Orders' });
     private cart = this.page.locator('#menu-item-44').getByRole('link', { name: 'Cart' });
-    private logOut = this.page.getByRole('link', { name: ' Logout' })
+    logOut = this.page.getByRole('link', { name: ' Logout' });
 
     //Service Methods
     async GoToShop(): Promise<ShopPOM> {
@@ -26,4 +26,5 @@ export default class MyAccountPOM extends BasePOM {
     async logout(){
         await this.logOut.click();
     }
+
 }

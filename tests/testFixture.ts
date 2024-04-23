@@ -23,6 +23,7 @@ export const test = base.extend<testFixture>({
 
         const loginPage = new LoginPOM(homePage.page);
         const myAccountPage = await loginPage.login(process.env.EMAIL, process.env.PASSWORD);
+        expect(myAccountPage.logOut, "Needs to be logged in").toBeVisible();
 
         await use(await myAccountPage.GoToShop());
 
