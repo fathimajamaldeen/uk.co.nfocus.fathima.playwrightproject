@@ -7,6 +7,7 @@ import OrdersInMyAccountPOM from './POMClasses/OrdersInMyAccountPOM';
 import products from '../test-data/products.json';
 import billingDetail from '../test-data/billingDetails.json';
 import discountData from '../test-data/discountCodes.json';
+import HelperLib from './POMClasses/HelperLib.ts';
 
 test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
     for (const product of products) {
@@ -20,9 +21,9 @@ test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
                 await cartPage.applyCouponCode();
 
                 const subtotalValue = await cartPage.captureSubTotalPrice();
-                const discountValue = await cartPage.captureDiscountPrice();
-                const expectedDiscountValue = parseFloat((subtotalValue * amount).toFixed(2));
-                expect(discountValue).toEqual(expectedDiscountValue);
+                //const discountValue = await cartPage.captureDiscountPrice();
+                const expectedDiscountText = HelperLib.formatCurrency(subtotalValue * amount);
+                expect.soft(cartPage.discountPriceElement, 'The discount is not the same!').toHaveText(expectedDiscountText);
 
 
                 //Cleaning up the cart
@@ -76,7 +77,7 @@ test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
                 body: orderNoInAccountScreenshot,
                 contentType: 'image/png',
             });
-            expect(orderNumberText).toEqual(accountOrderNumberCleaned);
+            expect(orderNumberText, 'The order numbers are not equal!').toEqual(accountOrderNumberCleaned);
         });
     };
 });

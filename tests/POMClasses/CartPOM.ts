@@ -7,7 +7,7 @@ export default class CartPOM extends BasePOM {
     private discountCodeField = this.page.getByPlaceholder('Coupon code');
     private applyCoupon = this.page.getByRole('button', { name: 'Apply coupon' });
     private proceedToCheckout = this.page.getByRole('link', { name: 'Proceed to checkout ' });
-    private discountPriceElement = this.page.locator('.cart-discount .woocommerce-Price-amount');
+    public discountPriceElement = this.page.locator('.cart-discount .woocommerce-Price-amount');
     private totalPriceElement = this.page.locator('strong bdi');
     private subtotalPriceElement = this.page.locator('td:nth-child(2) > .woocommerce-Price-amount > bdi');
     private shippingPriceElement = this.page.locator('label bdi');
@@ -51,18 +51,18 @@ export default class CartPOM extends BasePOM {
 
     //Capturing Methods
     async captureDiscountPrice(): Promise<number>{
-        return this.helperLib.ValueCleaner(this.discountPriceElement);
+        return this.helperLib.valueCleaner(this.discountPriceElement);
     }
 
     async captureTotalPrice(): Promise<number> {
-        return this.helperLib.ValueCleaner(this.totalPriceElement);
+        return this.helperLib.valueCleaner(this.totalPriceElement);
     }
 
     async captureSubTotalPrice(): Promise<number> {
-        return this.helperLib.ValueCleaner(this.subtotalPriceElement);
+        return this.helperLib.valueCleaner(this.subtotalPriceElement);
     }
 
     async captureShippingPrice(): Promise<number> {
-        return this.helperLib.ValueCleaner(this.shippingPriceElement);
+        return this.helperLib.valueCleaner(this.shippingPriceElement);
     }
 }

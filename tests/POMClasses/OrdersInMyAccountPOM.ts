@@ -15,7 +15,7 @@ export default class OrdersInMyaccountPOM extends BasePOM{
 
     //ServiceMethods
     async captureAccountOrderNumber(): Promise<string>{
-        return this.helperLib.CleaningOrderValue(this.accountOrderNumber); 
+        return this.helperLib.cleaningOrderValue(this.accountOrderNumber); 
     }
 
     async logout(){
