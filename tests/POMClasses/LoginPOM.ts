@@ -16,9 +16,7 @@ export default class LoginPOM extends BasePOM {
         //dont have to do this if you have a global as its mandatory
         
         if (username && password) {
-            await this.usernameField.clear();
             await this.usernameField.fill(username);
-            await this.passwordField.clear();
             await this.passwordField.fill(password);
             await this.loginElement.click();
         };

@@ -1,6 +1,7 @@
-import { Page } from '@playwright/test'
+import { Page, expect } from '@playwright/test'
 import HelperLib from './HelperLib'
 import BasePOM from './BasePOM'
+import exp from 'constants';
 
 export default class CartPOM extends BasePOM {
    
@@ -24,8 +25,6 @@ export default class CartPOM extends BasePOM {
     }
 
     async applyDiscountCode(discountCode: string) {
-        await this.discountCodeField.click();
-        await this.discountCodeField.clear();
         await this.discountCodeField.fill(discountCode);
     }
 
@@ -42,11 +41,21 @@ export default class CartPOM extends BasePOM {
     }
 
     async removeCouponCodeFromCart(){
-        await this.removeCoupon.click();
+        await expect( async () => {
+            if (await this.removeCoupon.first().isVisible()){
+                await this.removeCoupon.first().click();
+            };
+            await expect(this.removeCoupon).toHaveCount(0);
+        }).toPass();
     }
     
     async removeItemFromCart(){
-        await this.removeItem.click();
+        await expect( async () => {
+            if (await this.removeItem.first().isVisible()){
+                await this.removeItem.first().click();
+            };
+            await expect(this.removeItem).toHaveCount(0);
+        }).toPass();
     }
 
     //Capturing Methods

@@ -21,16 +21,8 @@ test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
                 await cartPage.applyCouponCode();
 
                 const subtotalValue = await cartPage.captureSubTotalPrice();
-                //const discountValue = await cartPage.captureDiscountPrice();
                 const expectedDiscountText = HelperLib.formatCurrency(subtotalValue * amount);
-                expect.soft(cartPage.discountPriceElement, 'The discount is not the same!').toHaveText(expectedDiscountText);
-
-
-                //Cleaning up the cart
-                await cartPage.removeCouponCodeFromCart();
-                await cartPage.removeItemFromCart();
-
-                await cartPage.goToMyAccount();
+                expect.soft(cartPage.discountPriceElement, 'The discount is not the same!').toHaveText(expectedDiscountText);               
             });
         };
     };

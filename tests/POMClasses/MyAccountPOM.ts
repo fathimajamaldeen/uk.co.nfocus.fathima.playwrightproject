@@ -1,4 +1,5 @@
 import BasePOM from './BasePOM';
+import CartPOM from './CartPOM';
 import ShopPOM from './ShopPOM';
 
 export default class MyAccountPOM extends BasePOM {
@@ -19,8 +20,9 @@ export default class MyAccountPOM extends BasePOM {
         await this.orders.click();
     }
 
-    async goToCart(){
+    async goToCart(): Promise<CartPOM> {
         await this.cart.click();
+        return new CartPOM(this.page);
     }
 
     async logout(){

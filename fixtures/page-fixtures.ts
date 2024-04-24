@@ -27,6 +27,14 @@ export const test = base.extend<testFixture>({
 
         await use(await myAccountPage.GoToShop());
 
+        const cartPage = await myAccountPage.goToCart();
+
+        
+        //Cleaning up the cart
+        await cartPage.removeCouponCodeFromCart();
+        await cartPage.removeItemFromCart();
+
+        await cartPage.goToMyAccount();
         await myAccountPage.logout();
 
         await homePage.page.close();
