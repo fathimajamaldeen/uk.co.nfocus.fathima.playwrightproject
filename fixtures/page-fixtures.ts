@@ -1,7 +1,7 @@
 import { expect, test as base } from '@playwright/test';
-import HomePOM from './POMClasses/HomePOM';
-import LoginPOM from './POMClasses/LoginPOM';
-import ShopPOM from './POMClasses/ShopPOM';
+import HomePOM from '../tests/POMClasses/HomePOM';
+import LoginPOM from '../tests/POMClasses/LoginPOM';
+import ShopPOM from '../tests/POMClasses/ShopPOM';
 
 type testFixture = {
     loggedInShop: ShopPOM;

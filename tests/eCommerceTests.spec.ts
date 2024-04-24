@@ -1,4 +1,4 @@
-import { test, expect } from './testFixture.ts';
+import { test, expect } from '../fixtures/page-fixtures.ts';
 import MyAccountPOM from './POMClasses/MyAccountPOM';
 import CartPOM from './POMClasses/CartPOM';
 import CheckoutPOM from './POMClasses/BillingPOM';
