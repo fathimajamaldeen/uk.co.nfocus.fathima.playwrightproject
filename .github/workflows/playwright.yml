@@ -20,7 +20,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Establish environment variables
-      run:
+      run: |
         echo "EMAIL=${{ secrets.EMAIL }}" >> .env
         echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env 
     - name: Run Playwright tests
