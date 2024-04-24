@@ -1,4 +1,4 @@
-import BasePOM from './BasePOM';
+import BasePOM from './base-pom';
 
 export default class OrderReceivedPOM extends BasePOM{
 

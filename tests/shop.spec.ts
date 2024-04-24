@@ -1,13 +1,13 @@
 import { test, expect } from '../fixtures/page-fixtures.ts';
-import MyAccountPOM from './POMClasses/MyAccountPOM';
-import CartPOM from './POMClasses/CartPOM';
-import CheckoutPOM from './POMClasses/BillingPOM';
-import OrderRecievedPOM from './POMClasses/OrderReceivedPOM';
-import OrdersInMyAccountPOM from './POMClasses/OrdersInMyAccountPOM';
+import MyAccountPOM from './POMClasses/myAccount-pom.ts';
+import CartPOM from './POMClasses/cart-pom.ts';
+import CheckoutPOM from './POMClasses/billing-pom.ts';
+import OrderRecievedPOM from './POMClasses/orderReceived-pom.ts';
+import OrdersInMyAccountPOM from './POMClasses/ordersInMyAccount-pom.ts';
 import products from '../test-data/products.json';
 import billingDetail from '../test-data/billingDetails.json';
 import discountData from '../test-data/discountCodes.json';
-import HelperLib from './POMClasses/HelperLib.ts';
+import HelperLib from './POMClasses/helperLib.ts';
 
 test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
     for (const product of products) {

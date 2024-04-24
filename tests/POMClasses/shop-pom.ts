@@ -1,5 +1,5 @@
-import BasePOM from './BasePOM';
-import CartPOM from './CartPOM';
+import BasePOM from './base-pom';
+import CartPOM from './cart-pom';
 
 export default class ShopPOM extends BasePOM{
 

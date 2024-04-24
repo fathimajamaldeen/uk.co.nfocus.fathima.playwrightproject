@@ -1,6 +1,6 @@
-import BasePOM from './BasePOM';
-import CartPOM from './CartPOM';
-import ShopPOM from './ShopPOM';
+import BasePOM from './base-pom';
+import CartPOM from './cart-pom';
+import ShopPOM from './shop-pom';
 
 export default class MyAccountPOM extends BasePOM {
 

@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test'
-import HelperLib from './HelperLib'
-import BasePOM from './BasePOM'
+import HelperLib from './helperLib'
+import BasePOM from './base-pom'
 import exp from 'constants';
 
 export default class CartPOM extends BasePOM {

@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
-import BasePOM from './BasePOM'
-import MyAccountPOM from './MyAccountPOM';
+import BasePOM from './base-pom'
+import MyAccountPOM from './myAccount-pom';
 
 
 export default class LoginPOM extends BasePOM {
