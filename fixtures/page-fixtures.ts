@@ -29,7 +29,6 @@ export const test = base.extend<testFixture>({
 
         const cartPage = await myAccountPage.goToCart();
 
-        
         //Cleaning up the cart
         await cartPage.removeCouponCodeFromCart();
         await cartPage.removeItemFromCart();

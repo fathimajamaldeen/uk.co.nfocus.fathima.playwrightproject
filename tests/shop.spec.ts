@@ -1,13 +1,13 @@
 import { test, expect } from '../fixtures/page-fixtures.ts';
 import MyAccountPOM from './POMClasses/myAccount-pom.ts';
 import CartPOM from './POMClasses/cart-pom.ts';
-import CheckoutPOM from './POMClasses/billing-pom.ts';
+import CheckoutPOM from './POMClasses/checkout-pom.ts';
 import OrderRecievedPOM from './POMClasses/orderReceived-pom.ts';
 import OrdersInMyAccountPOM from './POMClasses/ordersInMyAccount-pom.ts';
 import products from '../test-data/products.json';
 import billingDetail from '../test-data/billing-details.json';
 import discountData from '../test-data/discount-codes.json';
-import HelperLib from './POMClasses/helperLib.ts';
+import HelperLib from './POMClasses/helper-library.ts';
 
 test.describe(`Multiple test cases for Edgewords eCommerce Website`, () => {
     for (const product of products) {
@@ -28,7 +28,7 @@ test.describe(`Multiple test cases for Edgewords eCommerce Website`, () => {
     };
 
     for (const product of products) {
-        test(`Checking out Test for the product ${product.item}`, async ({ loggedInShop }, testInfo) => {
+        test(`Checking out Test for the product ${product.item}`, async ({ loggedInShop }) => {
             await loggedInShop.addItemToCart(product.item);
 
             await loggedInShop.goToCart();

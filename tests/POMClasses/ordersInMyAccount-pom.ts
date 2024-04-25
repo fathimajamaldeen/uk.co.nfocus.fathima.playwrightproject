@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test'
-import HelperLib from './helperLib'
+import HelperLib from './helper-library'
 import BasePOM from './base-pom';
 
 export default class OrdersInMyaccountPOM extends BasePOM{
