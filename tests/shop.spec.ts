@@ -9,7 +9,7 @@ import billingDetail from '../test-data/billingDetails.json';
 import discountData from '../test-data/discountCodes.json';
 import HelperLib from './POMClasses/helperLib.ts';
 
-test.describe(`Multiple test cases for nFocus eCommerce Website`, () => {
+test.describe(`Multiple test cases for Edgewords eCommerce Website`, () => {
     for (const product of products) {
         for (const { code, amount } of discountData) {
             test(`Applying Discount Code Test - ${code} for the product ${product.item}`,async ({ loggedInShop }) => {

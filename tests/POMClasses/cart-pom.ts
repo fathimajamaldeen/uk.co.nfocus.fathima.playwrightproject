@@ -8,10 +8,10 @@ export default class CartPOM extends BasePOM {
     private discountCodeField = this.page.getByPlaceholder('Coupon code');
     private applyCoupon = this.page.getByRole('button', { name: 'Apply coupon' });
     private proceedToCheckout = this.page.getByRole('link', { name: 'Proceed to checkout ' });
-    public discountPriceElement = this.page.locator('.cart-discount .woocommerce-Price-amount');
+    public discountPriceElement = this.page.locator('.cart-discount .amount');
     private totalPriceElement = this.page.locator('strong bdi');
-    private subtotalPriceElement = this.page.locator('td:nth-child(2) > .woocommerce-Price-amount > bdi');
-    private shippingPriceElement = this.page.locator('label bdi');
+    private subtotalPriceElement = this.page.locator('.shop_table .cart-subtotal .woocommerce-Price-amount');
+    private shippingPriceElement = this.page.locator('.woocommerce-shipping-totals .woocommerce-Price-amount');
     private myAccount = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
     private removeCoupon = this.page.getByRole('link', { name: '[Remove]' });
     private removeItem = this.page.getByLabel('Remove this item');
@@ -21,7 +21,6 @@ export default class CartPOM extends BasePOM {
     constructor(page: Page) {
         super(page);
         this.helperLib = new HelperLib();
-        //Locator
     }
 
     async applyDiscountCode(discountCode: string) {
