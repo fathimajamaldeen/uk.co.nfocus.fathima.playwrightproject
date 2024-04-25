@@ -22,7 +22,7 @@ test.describe(`Multiple test cases for Edgewords eCommerce Website`, () => {
 
                 const subtotalValue = await cartPage.captureSubTotalPrice();
                 const expectedDiscountText = HelperLib.formatCurrency(subtotalValue * amount);
-                expect.soft(cartPage.discountPriceElement, 'The discount is not the same!').toHaveText(expectedDiscountText);               
+                await expect.soft(cartPage.discountPriceElement, 'The discount is not the same!').toHaveText(expectedDiscountText);               
             });
         };
     };
@@ -47,14 +47,6 @@ test.describe(`Multiple test cases for Edgewords eCommerce Website`, () => {
             const orderReceivedPage = new OrderRecievedPOM(loggedInShop.page);
             const orderNumberText = await orderReceivedPage.captureOrderNumber();
 
-            const orderNoScreenshot = await loggedInShop.page.screenshot(
-                { path: `screenshots/test2/orderNo-${product.item}.png` });
-
-            await testInfo.attach('Order No', {
-                body: orderNoScreenshot,
-                contentType: 'image/png',
-            });
-
             await orderReceivedPage.goToMyAccount();
 
             const myAccountPage = new MyAccountPOM(loggedInShop.page);
@@ -62,13 +54,7 @@ test.describe(`Multiple test cases for Edgewords eCommerce Website`, () => {
 
             const ordersPage = new OrdersInMyAccountPOM(loggedInShop.page);
             const accountOrderNumberCleaned = await ordersPage.captureAccountOrderNumber();
-            const orderNoInAccountScreenshot = await loggedInShop.page.screenshot(
-                { path: `screenshots/test2/orderNoInAccount-${product.item}.png` });
-
-            await testInfo.attach('Order No. in Account', {
-                body: orderNoInAccountScreenshot,
-                contentType: 'image/png',
-            });
+      
             expect(orderNumberText, 'The order numbers are not equal!').toEqual(accountOrderNumberCleaned);
         });
     };
