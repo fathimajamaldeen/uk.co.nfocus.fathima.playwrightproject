@@ -38,6 +38,6 @@ export const test = base.extend<testFixture>({
         await myAccountPage.logout();
 
         await homePage.page.close();
-    }
+    },
 });
 export { expect } from '@playwright/test';

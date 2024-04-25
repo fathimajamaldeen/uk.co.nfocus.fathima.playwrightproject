@@ -5,8 +5,8 @@ import CheckoutPOM from './POMClasses/billing-pom.ts';
 import OrderRecievedPOM from './POMClasses/orderReceived-pom.ts';
 import OrdersInMyAccountPOM from './POMClasses/ordersInMyAccount-pom.ts';
 import products from '../test-data/products.json';
-import billingDetail from '../test-data/billingDetails.json';
-import discountData from '../test-data/discountCodes.json';
+import billingDetail from '../test-data/billing-details.json';
+import discountData from '../test-data/discount-codes.json';
 import HelperLib from './POMClasses/helperLib.ts';
 
 test.describe(`Multiple test cases for Edgewords eCommerce Website`, () => {

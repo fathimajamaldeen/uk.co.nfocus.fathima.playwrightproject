@@ -12,7 +12,7 @@ export default class CartPOM extends BasePOM {
     private totalPriceElement = this.page.locator('strong bdi');
     private subtotalPriceElement = this.page.locator('.shop_table .cart-subtotal .woocommerce-Price-amount');
     private shippingPriceElement = this.page.locator('.woocommerce-shipping-totals .woocommerce-Price-amount');
-    private myAccount = this.page.locator('#menu-item-46').getByRole('link', { name: 'My account' });
+    private myAccount = this.page.locator('#menu-main').getByRole('link', { name: 'My account' });
     private removeCoupon = this.page.getByRole('link', { name: '[Remove]' });
     private removeItem = this.page.getByLabel('Remove this item');
 
